@@ -32,7 +32,7 @@ const handleReset = () => boardStore.reset()
       </div>
       <ol class="divide-y divide-slate-800 max-h-80 overflow-auto" aria-live="polite">
         <li v-if="!history.length" class="px-4 py-4 text-center text-slate-500 text-sm">
-          No clicks yet. Tap a square to begin.
+          No clicks yet. Tap/click the board to begin.
         </li>
         <li
           v-for="(square, idx) in history"
