@@ -45,10 +45,12 @@ const isLastClicked = (squareId: SquareId) => lastSquare.value === squareId
         @click="handleSquareClick(square.id)"
         class="relative flex items-center justify-center text-lg font-semibold transition"
         :class="[
-          square.isLight ? 'bg-amber-100 text-slate-900' : 'bg-slate-700 text-slate-100',
           isLastClicked(square.id)
-            ? 'ring-4 ring-cyan-400 ring-inset shadow-[0_0_25px_rgba(34,211,238,0.45)]'
-            : 'hover:brightness-110 focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:outline-none',
+            ? 'bg-board-highlight text-slate-900'
+            : [
+                square.isLight ? 'bg-board-light text-slate-900' : 'bg-board-dark text-slate-500',
+                'hover:brightness-110',
+              ],
         ]"
         :aria-pressed="isLastClicked(square.id)"
         :aria-label="`Square ${square.id}`"
@@ -60,7 +62,7 @@ const isLastClicked = (squareId: SquareId) => lastSquare.value === squareId
         >
           Last
         </span>
-        <span class="pointer-events-none text-sm font-medium text-slate-300">{{ square.id }}</span>
+        <span class="pointer-events-none text-sm font-medium text-slate-700">{{ square.id }}</span>
       </button>
     </div>
   </div>
