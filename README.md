@@ -1,54 +1,20 @@
-# chess-test
+# Chess.com - Front End Programming Challenge
 
-This template should help get you started developing with Vue 3 in Vite.
+Welcome to the [Chess.com](https://chess.com) front end programming challenge!
 
-## Recommended IDE Setup
+# Instructions
+1. Create a VueJS application that satisfies the requirements detailed below.
+2. Create a .zip file containing all files of your completed project.
+3. Submit your .zip file (downloadable link or email attachment) and a link to a live demo of your project.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+# Application Requirements
+1. Create a page with a chessboard and a sidebar.
+2. On desktop devices the sidebar should be positioned to the right of the chessboard.
+3. On mobile devices the sidebar should be positioned below the chessboard.
+4. The chessboard should resize responsively to consume available space.
+5. Clicking a chessboard square should highlight the square.
+6. Keep track of which squares are clicked and the order in which they're clicked.
+7. Display the information collected from step 6 in the sidebar.
 
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+# Questions & Feedback
+Please contact Nick Kampa (nkampa@chess.com) with any questions or feedback regarding this challenge.
