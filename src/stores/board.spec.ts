@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
-import { useBoardStore, type SquareId } from './board'
+import { useBoardStore } from './board'
+import type { SquareId } from '@/lib/board'
 
 describe('board store', () => {
   beforeEach(() => {

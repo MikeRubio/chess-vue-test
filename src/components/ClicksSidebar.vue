@@ -6,13 +6,19 @@ const boardStore = useBoardStore()
 const { history, lastSquare, hasHistory } = storeToRefs(boardStore)
 
 const handleReset = () => boardStore.reset()
+
+const moveLabel = (square: string, idx: number) => {
+  if (idx === 0) return square.toUpperCase()
+  const from = history.value[idx - 1]?.toUpperCase()
+  return `${from} to ${square.toUpperCase()}`
+}
 </script>
 
 <template>
   <aside class="lg:w-80 w-full bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-4">
     <div class="flex items-center justify-between gap-3">
       <div>
-        <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Sidebar</p>
+        <p class="text-xs uppercase text-slate-400">Sidebar</p>
         <h2 class="text-xl font-semibold">Click History</h2>
       </div>
       <button
@@ -41,7 +47,7 @@ const handleReset = () => boardStore.reset()
         >
           <span class="font-semibold text-cyan-200">{{ idx + 1 }}</span>
           <span class="font-medium" :class="square === lastSquare ? 'text-cyan-100' : ''">
-            {{ square.toUpperCase() }}
+            {{ moveLabel(square, idx) }}
           </span>
         </li>
       </ol>

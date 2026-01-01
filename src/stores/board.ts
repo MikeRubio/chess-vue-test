@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia'
-
-export type SquareId =
-  `${'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h'}${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8}`
+import { type SquareId } from '@/lib/board'
 
 export const useBoardStore = defineStore('board', {
   state: () => ({

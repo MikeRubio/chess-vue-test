@@ -1,23 +1,27 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useBoardStore, type SquareId } from '@/stores/board'
-
-const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] as const
-const ranks = [8, 7, 6, 5, 4, 3, 2, 1]
+import { useBoardStore } from '@/stores/board'
+import { boardFiles, boardRanks, type BoardFile, type BoardRank, type SquareId } from '@/lib/board'
 
 type Square = {
   id: SquareId
+  file: BoardFile
+  rank: BoardRank
+  fileIndex: number
   isLight: boolean
 }
 
 const squares = computed<Square[]>(() =>
-  ranks.flatMap((rank) =>
-    files.map((file, fileIndex) => {
+  boardRanks.flatMap((rank) =>
+    boardFiles.map((file, fileIndex) => {
       const squareId = `${file}${rank}` as SquareId
       const isLight = ((fileIndex + 1) + rank) % 2 === 1
       return {
         id: squareId,
+        file,
+        rank,
+        fileIndex,
         isLight,
       }
     }),
@@ -33,6 +37,24 @@ const handleSquareClick = (squareId: SquareId) => {
 
 const isLastClicked = (squareId: SquareId) => lastSquare.value === squareId
 
+const coordinateLabel = (square: Square): string => {
+  const showRank = square.fileIndex === 0
+  const showFile = square.rank === 1
+
+  if (showRank && showFile) {
+    return `${square.rank} ${square.file}`
+  }
+
+  if (showRank) {
+    return `${square.rank}`
+  }
+
+  if (showFile) {
+    return `${square.file}`
+  }
+
+  return ''
+}
 </script>
 
 <template>
@@ -44,7 +66,7 @@ const isLastClicked = (squareId: SquareId) => lastSquare.value === squareId
         type="button"
         @click="handleSquareClick(square.id)"
         class="relative flex items-center justify-center text-lg font-semibold transition"
-        :class="[
+                :class="[
           isLastClicked(square.id)
             ? 'bg-board-highlight text-slate-900'
             : [
@@ -52,10 +74,23 @@ const isLastClicked = (squareId: SquareId) => lastSquare.value === squareId
                 'hover:brightness-110',
               ],
         ]"
+
         :aria-pressed="isLastClicked(square.id)"
         :aria-label="`Square ${square.id}`"
       >
-        <span class="pointer-events-none text-sm font-medium text-slate-700 ">{{ square.id }}</span>
+        <span
+          v-if="coordinateLabel(square)"
+          class="pointer-events-none absolute bottom-1 left-1 text-xl font-semibold select-none"
+          :class="
+            isLastClicked(square.id)
+              ? 'text-board-dark'
+              : square.isLight
+                ? 'text-board-dark'
+                : 'text-board-light'
+          "
+        >
+          {{ coordinateLabel(square) }}
+        </span>
       </button>
     </div>
   </div>
