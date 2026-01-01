@@ -29,6 +29,7 @@ describe('ChessBoard', () => {
 
     expect(store.lastSquare).toBe('a8')
     expect(buttons[0]?.classes()).toContain('bg-board-highlight')
+    expect(store.history).toEqual(['a8'])
 
     await buttons[1]?.trigger('click')
     await nextTick()
@@ -36,5 +37,11 @@ describe('ChessBoard', () => {
     expect(store.lastSquare).toBe('b8')
     expect(buttons[1]?.classes()).toContain('bg-board-highlight')
     expect(buttons[0]?.classes()).not.toContain('bg-board-highlight')
+    expect(store.history).toEqual(['a8', 'b8'])
+
+    await buttons[1]?.trigger('click')
+    await nextTick()
+
+    expect(store.history).toEqual(['a8', 'b8'])
   })
 })

@@ -36,7 +36,7 @@ const isLastClicked = (squareId: SquareId) => lastSquare.value === squareId
 </script>
 
 <template>
-  <div class="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-slate-800 bg-slate-800/40">
+  <div class="relative overflow-hidden shadow-2xl ring-1 ring-slate-800 bg-slate-800/40">
     <div class="grid grid-cols-8 aspect-square w-full">
       <button
         v-for="square in squares"
@@ -55,14 +55,7 @@ const isLastClicked = (squareId: SquareId) => lastSquare.value === squareId
         :aria-pressed="isLastClicked(square.id)"
         :aria-label="`Square ${square.id}`"
       >
-        <span class="sr-only">Square {{ square.id }}</span>
-        <span
-          v-if="isLastClicked(square.id)"
-          class="absolute left-2 top-2 inline-flex h-7 items-center justify-center rounded-full bg-slate-900/80 px-2 text-xs font-bold text-cyan-100"
-        >
-          Last
-        </span>
-        <span class="pointer-events-none text-sm font-medium text-slate-700">{{ square.id }}</span>
+        <span class="pointer-events-none text-sm font-medium text-slate-700 ">{{ square.id }}</span>
       </button>
     </div>
   </div>

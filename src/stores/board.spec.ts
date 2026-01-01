@@ -21,6 +21,17 @@ describe('board store', () => {
     expect(store.lastSquare).toBe(second)
   })
 
+  it('does not log back-to-back duplicates', () => {
+    const store = useBoardStore()
+
+    store.recordClick('c3')
+    store.recordClick('c3')
+    store.recordClick('c3')
+
+    expect(store.history).toEqual(['c3'])
+    expect(store.lastSquare).toBe('c3')
+  })
+
   it('resets history and the last square clicked', () => {
     const store = useBoardStore()
     store.recordClick('c3')

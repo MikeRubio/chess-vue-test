@@ -13,6 +13,7 @@ export const useBoardStore = defineStore('board', {
   },
   actions: {
     recordClick(square: SquareId) {
+      if (this.lastSquare === square) return
       this.history.push(square)
       this.lastSquare = square
     },
