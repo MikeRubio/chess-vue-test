@@ -1,3 +1,42 @@
+<template>
+  <div class="relative overflow-hidden shadow-2xl ring-1 ring-slate-800 bg-slate-800/40">
+    <div class="grid grid-cols-8 aspect-square w-full">
+      <button
+        v-for="square in squares"
+        :key="square.id"
+        type="button"
+        @click="handleSquareClick(square.id)"
+        class="relative flex items-center justify-center text-lg font-semibold transition"
+                :class="[
+          isLastClicked(square.id)
+            ? 'bg-board-highlight text-slate-900'
+            : [
+                square.isLight ? 'bg-board-light text-slate-900' : 'bg-board-dark text-slate-500',
+                'hover:brightness-110',
+              ],
+        ]"
+
+        :aria-pressed="isLastClicked(square.id)"
+        :aria-label="`Square ${square.id}`"
+      >
+        <span
+          v-if="coordinateLabel(square)"
+          class="pointer-events-none absolute bottom-1 left-1 text-xl font-semibold select-none"
+          :class="
+            isLastClicked(square.id)
+              ? 'text-board-dark'
+              : square.isLight
+                ? 'text-board-dark'
+                : 'text-board-light'
+          "
+        >
+          {{ coordinateLabel(square) }}
+        </span>
+      </button>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -56,42 +95,3 @@ const coordinateLabel = (square: Square): string => {
   return ''
 }
 </script>
-
-<template>
-  <div class="relative overflow-hidden shadow-2xl ring-1 ring-slate-800 bg-slate-800/40">
-    <div class="grid grid-cols-8 aspect-square w-full">
-      <button
-        v-for="square in squares"
-        :key="square.id"
-        type="button"
-        @click="handleSquareClick(square.id)"
-        class="relative flex items-center justify-center text-lg font-semibold transition"
-                :class="[
-          isLastClicked(square.id)
-            ? 'bg-board-highlight text-slate-900'
-            : [
-                square.isLight ? 'bg-board-light text-slate-900' : 'bg-board-dark text-slate-500',
-                'hover:brightness-110',
-              ],
-        ]"
-
-        :aria-pressed="isLastClicked(square.id)"
-        :aria-label="`Square ${square.id}`"
-      >
-        <span
-          v-if="coordinateLabel(square)"
-          class="pointer-events-none absolute bottom-1 left-1 text-xl font-semibold select-none"
-          :class="
-            isLastClicked(square.id)
-              ? 'text-board-dark'
-              : square.isLight
-                ? 'text-board-dark'
-                : 'text-board-light'
-          "
-        >
-          {{ coordinateLabel(square) }}
-        </span>
-      </button>
-    </div>
-  </div>
-</template>

@@ -1,19 +1,3 @@
-<script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useBoardStore } from '@/stores/board'
-
-const boardStore = useBoardStore()
-const { history, lastSquare, hasHistory } = storeToRefs(boardStore)
-
-const handleReset = () => boardStore.reset()
-
-const moveLabel = (square: string, idx: number) => {
-  if (idx === 0) return square.toUpperCase()
-  const from = history.value[idx - 1]?.toUpperCase()
-  return `${from} to ${square.toUpperCase()}`
-}
-</script>
-
 <template>
   <aside class="lg:w-80 w-full bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-4">
     <div class="flex items-center justify-between gap-3">
@@ -54,3 +38,19 @@ const moveLabel = (square: string, idx: number) => {
     </div>
   </aside>
 </template>
+
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useBoardStore } from '@/stores/board'
+
+const boardStore = useBoardStore()
+const { history, lastSquare, hasHistory } = storeToRefs(boardStore)
+
+const handleReset = () => boardStore.reset()
+
+const moveLabel = (square: string, idx: number) => {
+  if (idx === 0) return square.toUpperCase()
+  const from = history.value[idx - 1]?.toUpperCase()
+  return `${from} to ${square.toUpperCase()}`
+}
+</script>
