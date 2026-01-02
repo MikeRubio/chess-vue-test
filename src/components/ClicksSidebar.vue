@@ -29,7 +29,12 @@
           :key="`${square}-${idx}`"
           class="flex items-center justify-between px-4 py-3 text-sm"
         >
-          <span class="font-semibold text-cyan-200">{{ idx + 1 }}</span>
+          <span
+            v-if="idx >= 1"
+            class="font-semibold text-cyan-200"
+          >
+            {{ idx }}
+          </span>
           <span class="font-medium" :class="square === lastSquare ? 'text-cyan-100' : ''">
             {{ moveLabel(square, idx) }}
           </span>
@@ -49,8 +54,9 @@ const { history, lastSquare, hasHistory } = storeToRefs(boardStore)
 const handleReset = () => boardStore.reset()
 
 const moveLabel = (square: string, idx: number) => {
-  if (idx === 0) return square.toUpperCase()
+  if (idx > 0) {
   const from = history.value[idx - 1]?.toUpperCase()
   return `${from} to ${square.toUpperCase()}`
+  }
 }
 </script>
