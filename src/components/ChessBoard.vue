@@ -6,7 +6,7 @@
         :key="square.id"
         type="button"
         @click="handleSquareClick(square.id)"
-        class="relative flex items-center justify-center text-lg font-semibold transition"
+        class="relative flex items-center justify-center font-semibold transition"
                 :class="[
           isLastClicked(square.id)
             ? 'bg-board-highlight text-slate-900'
@@ -21,7 +21,7 @@
       >
         <span
           v-if="coordinateLabel(square)"
-          class="pointer-events-none absolute bottom-1 left-1 text-xl font-semibold select-none"
+          class="pointer-events-none absolute bottom-1 left-1 text-xs font-semibold select-none"
           :class="
             isLastClicked(square.id)
               ? 'text-board-dark'

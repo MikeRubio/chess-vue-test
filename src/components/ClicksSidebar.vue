@@ -20,23 +20,26 @@
         <span>#</span>
         <span>Square</span>
       </div>
+
       <ol class="divide-y divide-slate-800 max-h-80 overflow-auto" aria-live="polite">
         <li v-if="!history.length" class="px-4 py-4 text-center text-slate-500 text-sm">
           No clicks yet. Tap/click the board to begin.
         </li>
+
         <li
-          v-for="(square, idx) in history"
-          :key="`${square}-${idx}`"
+          v-for="(square, idx) in reversedHistory"
+          :key="`${square}-${history.length - 1 - idx}`"
           class="flex items-center justify-between px-4 py-3 text-sm"
         >
           <span
-            v-if="idx >= 1"
+            v-if="(history.length - 1 - idx) >= 1"
             class="font-semibold text-cyan-200"
           >
-            {{ idx }}
+            {{ history.length - 1 - idx }}
           </span>
+
           <span class="font-medium" :class="square === lastSquare ? 'text-cyan-100' : ''">
-            {{ moveLabel(square, idx) }}
+            {{ moveLabel(square, history.length - 1 - idx) }}
           </span>
         </li>
       </ol>
@@ -45,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useBoardStore } from '@/stores/board'
 
@@ -53,10 +57,12 @@ const { history, lastSquare, hasHistory } = storeToRefs(boardStore)
 
 const handleReset = () => boardStore.reset()
 
-const moveLabel = (square: string, idx: number) => {
-  if (idx > 0) {
-  const from = history.value[idx - 1]?.toUpperCase()
-  return `${from} to ${square.toUpperCase()}`
+const reversedHistory = computed(() => [...history.value].reverse())
+
+const moveLabel = (square: string, originalIdx: number) => {
+  if (originalIdx > 0) {
+    const from = history.value[originalIdx - 1]?.toUpperCase()
+    return `${from} to ${square.toUpperCase()}`
   }
 }
 </script>
